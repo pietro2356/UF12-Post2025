@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Post } from './core/model/post.model';
-import { PostCardComponent } from "./ui/post-card/post-card.component";
+import { PostCardComponent } from './ui/post-card/post-card.component';
+import { PostManagerService } from './core/service/PostManager/post-manager.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -27,20 +29,8 @@ export class AppComponent {
    *
    */
 
-  postList = signal<Post[]>([]);
+  #http = inject(HttpClient);
 
-  generaPost(){
-    this.postList.update(item => {
-      return [...item, {
-        titolo: "Seconda lezione all'AFP",
-        body: 'Stiamo imparando a creare progetti con Angular e a strutturarli',
-        id: 0,
-        userId: Math.floor(Math.random() * 100),
-      }];
-    });
-  }
-}
-
-class Pippo{
-  prop: string = "sdfsd";
+  postManagerSrv = inject(PostManagerService);
+  constructor() {}
 }

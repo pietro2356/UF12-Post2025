@@ -1,6 +1,12 @@
-<button (click)="generaPost()">Aggiungi post: {{postList().length}}</button>
+<button (click)="postManagerSrv.generaPost()">
+    Aggiungi post: {{postManagerSrv.postListComp().length}}
+</button>
+<button (click)="postManagerSrv.recuperaPostViaHttp()">
+    Recupera post
+</button>
+
 <div class="post__container">
-    @for (post of postList(); track post.id) {
+    @for (post of postManagerSrv.postListComp(); track post.id) {
         <app-post-card [post]="post"></app-post-card>
     }
     @empty {
