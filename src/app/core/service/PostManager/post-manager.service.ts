@@ -3,20 +3,45 @@ import { Post } from '../../model/post.model';
 import { HttpClient } from '@angular/common/http';
 import { catchError, of, retry } from 'rxjs';
 
+/**
+ * Servizio per la gestione dei post
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class PostManagerService {
-  #URL = "https://jsonplaceholder.typicode.com/possdfts";
+  /**
+   * URL per la richiesta dei post
+   * @private
+   */
+  #URL = "https://jsonplaceholder.typicode.com/posts";
 
+  /**
+   * Servizio per le chiamate HTTP
+   * @private
+   */
   #http = inject(HttpClient);
 
+  /**
+   * Lista locale dei post
+   * @private
+   */
   #postList = signal<Post[]>([]);
+
+  /**
+   * Lista dei post disponibile per la verso l'esterno del servizio
+   */
   postListComp = computed(() => this.#postList());
 
 
   constructor() { }
 
+  /**
+   * Recupera i post via HTTP e li salva nella lista locale #postList.
+   *
+   * Se la richiesta HTTP fallisce, viene restituito un post fittizio con un messaggio di errore.
+   * @returns void
+   */
   recuperaPostViaHttp(): void{
     this.#http.get<Post[]>(this.#URL)
     .pipe(
@@ -39,6 +64,10 @@ export class PostManagerService {
     });
   }
 
+  /**
+   * Aggiunge un post manuale alla lista locale #postList
+   * @returns void
+   */
   generaPost() {
     this.#postList.update((item: Post[]) => {
       return [
