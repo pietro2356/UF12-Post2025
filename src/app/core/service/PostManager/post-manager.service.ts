@@ -7,7 +7,7 @@ import { catchError, of, retry } from 'rxjs';
   providedIn: 'root'
 })
 export class PostManagerService {
-  #URL = "https://jsonplaceholder.typicode.com/possdfts";
+  #URL = "https://jsonplaceholder.typicode.com/posts";
 
   #http = inject(HttpClient);
 
@@ -16,6 +16,19 @@ export class PostManagerService {
 
 
   constructor() { }
+
+  recuperaPostViaId(postId: number): Post{
+    console.log("Postlist:", this.#postList());
+    console.log("postId:", postId);
+    console.log("find:", this.#postList().find(p => p.id === postId));
+    
+    return this.#postList().find(p => p.id === postId) ?? {
+      id: -999,
+      titolo: "Post non disponibili",
+      userId: -999,
+      body: "E3423 - ",
+    };
+  }
 
   recuperaPostViaHttp(): void{
     this.#http.get<Post[]>(this.#URL)

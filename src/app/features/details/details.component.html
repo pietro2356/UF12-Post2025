@@ -1,0 +1,15 @@
+<p>details works!</p>
+<h2>
+    <a 
+        [routerLink]="['/home']"
+        routerLinkActive="router-link-active" 
+    >
+        HOME
+    </a>
+</h2>
+
+<button (click)="showData()">SHOW</button>
+<h1>POSTID: {{postIdParam()}}</h1>
+<h1>Titolo: {{postDetail().titolo}}</h1>
+<h1>Id: {{postDetail().id}}</h1>
+<h1>body: {{postDetail().body}}</h1>

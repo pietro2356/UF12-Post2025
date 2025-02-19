@@ -4,5 +4,8 @@
     <div class="post()__info">
         <p>ID: {{post().id}}</p>
         <p>Matricola: {{post().userId}}</p>
+        <button (click)="visualizzaDettagli(post().id)">
+            DETTAGLI
+        </button>
     </div>
 </div>

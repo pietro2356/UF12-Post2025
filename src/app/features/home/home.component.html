@@ -1,0 +1,24 @@
+<button (click)="postManagerSrv.generaPost()">
+    Aggiungi post: {{postManagerSrv.postListComp().length}}
+</button>
+<button (click)="postManagerSrv.recuperaPostViaHttp()">
+    Recupera post
+</button>
+
+<h2>
+    <a 
+        [routerLink]="['/dettagli']"
+        routerLinkActive="router-link-active" 
+    >
+        DETTAGLI
+    </a>
+</h2>
+
+<div class="post__container">
+    @for (post of postManagerSrv.postListComp(); track post.id) {
+        <app-post-card [post]="post"></app-post-card>
+    }
+    @empty {
+        <h1>Nessun post disponibile</h1>
+    }
+</div>
