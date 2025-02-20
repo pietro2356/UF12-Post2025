@@ -1,14 +1,14 @@
 /**
  *    * 1)
    *  Post
-   *    - titolo
+   *    - title
    *    - descrizione
    *    - id
    *    - userId
  */
 
 export interface Post{
-    titolo: string,
+    title: string,
     body: string,
     id: number,
     userId: number

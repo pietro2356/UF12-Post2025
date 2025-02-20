@@ -12,11 +12,16 @@ export class PostManagerService {
   #http = inject(HttpClient);
 
   #postList = signal<Post[]>([]);
-  postListComp = computed(() => this.#postList());
+  readonly postListComp = computed(() => this.#postList());
 
 
   constructor() { }
 
+  /**
+   * Metodo per recuperare la lista dei post
+   * @param postId codice ID del post da cercare
+   * @returns Post trovato
+   */
   recuperaPostViaId(postId: number): Post{
     console.log("Postlist:", this.#postList());
     console.log("postId:", postId);
@@ -24,12 +29,15 @@ export class PostManagerService {
     
     return this.#postList().find(p => p.id === postId) ?? {
       id: -999,
-      titolo: "Post non disponibili",
+      title: "Post non disponibili",
       userId: -999,
-      body: "E3423 - ",
+      body: "E3423",
     };
   }
 
+  /**
+   * Metodo per recuperare i post via http
+   */
   recuperaPostViaHttp(): void{
     this.#http.get<Post[]>(this.#URL)
     .pipe(
@@ -39,7 +47,7 @@ export class PostManagerService {
         return of<Post[]>([
           {
             id: -1,
-            titolo: "Post non disponibili",
+            title: "Post non disponibili",
             userId: -1,
             body: "E3423 - " + err.message,
           }
@@ -52,12 +60,15 @@ export class PostManagerService {
     });
   }
 
+  /**
+   * Metodo per generare un post
+   */
   generaPost() {
     this.#postList.update((item: Post[]) => {
       return [
         ...item,
         {
-          titolo: "Seconda lezione all'AFP",
+          title: "Seconda lezione all'AFP",
           body: 'Stiamo imparando a creare progetti con Angular e a strutturarli',
           id: 0,
           userId: Math.floor(Math.random() * 100),

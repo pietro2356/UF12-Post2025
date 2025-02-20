@@ -4,13 +4,12 @@ import { HomeComponent } from './features/home/home.component';
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
-    // EVENTI
     {
         path: 'home',
         component: HomeComponent
     },
     {
-        path: 'dettagli', // /dettagli/4
+        path: 'dettagli', // /dettagli
         component: DetailsComponent
     },
     {

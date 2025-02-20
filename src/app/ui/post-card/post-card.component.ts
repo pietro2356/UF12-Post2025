@@ -17,7 +17,6 @@ export class PostCardComponent {
 
   visualizzaDettagli(postId: number){
     // /dettagli/:id
-    console.log(postId);
     this.router.navigate(['/dettagli/'+postId]);
   }
 }
