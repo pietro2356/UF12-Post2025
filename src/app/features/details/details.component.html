@@ -21,7 +21,7 @@
     diamo la possibilità di recuperare i post tramite la chiamata HTTP.
 -->
 @if (postDetail.id !== -999) {
-    <h1>POSTID: {{postId()}}</h1>
+    <h1>POSTID: {{postDetail.id}}</h1>
     <h1>Titolo: {{postDetail.title}}</h1>
     <h1>Id: {{postDetail.id}}</h1>
     <h1>body: {{postDetail.body}}</h1>
@@ -32,3 +32,8 @@
         Recupera post
     </button>
 }
+
+<hr>
+<h3>PostId: {{postId() ?? "Non fornito"}}</h3>
+<h3>token: {{token() ?? "Non fornito"}}</h3>
+<h3>passwd: {{passwd() ?? "Non fornito"}}</h3>

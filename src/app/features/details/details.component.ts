@@ -14,7 +14,7 @@ export class DetailsComponent{
   
   // Variabili InputSignal che grazie alla funzione withComponentInputBinding() dentro al file app.config.ts
   // ci permette di fare un accoppiamento tra parametri sull'URL e variabili del compomente.
-  readonly postId = input<string>();
+  readonly postId = input<number>();
   readonly token = input<string>();
   readonly passwd = input<string>();
 

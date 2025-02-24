@@ -19,4 +19,7 @@ export class PostCardComponent {
     // /dettagli/:id
     this.router.navigate(['/dettagli/'+postId]);
   }
+  modifca(){
+    this.router.navigate(["/modifica-post/"+this.post().userId+"?titolo="+this.post().title+"&body="+this.post().body]);
+  }
 }
