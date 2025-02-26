@@ -3,11 +3,14 @@
 @let st = appState.message();
 
 @if (st) {
-    <p>Message: {{appState.message()}}</p>
+<p>Message: {{appState.message()}}</p>
 }
-<button (click)="appState.setStateToReady()">READY</button>
-<button (click)="appState.setStateToLoading()">LOADING</button>
-<button (click)="appState.setStateToLoading('Caricamento')">LOADING + MSG</button>
-<button (click)="appState.setStateToError('Errore manuale...')">ERROR</button>
+<div class="flex justify-center">
+    <p-button (click)="appState.setStateToReady()" label="READY" severity="success" />
+    <p-button (click)="appState.setStateToLoading()" label="LOADING" severity="help" [loading]="appState.state() === 'LOADING'" />
+    <p-button (click)="appState.setStateToLoading('Caricamento')" label="LOADING + MSG" severity="help" [loading]="appState.state() === 'LOADING'" />
+    <p-button (click)="appState.setStateToError('Errore manuale...')" label="ERROR" severity="danger" [rounded]="true"/>
+</div>
 
-<router-outlet/>
+
+<router-outlet />

@@ -3,10 +3,12 @@ import { Post } from '../../core/model/post.model';
 import { PostManagerService } from '../../core/service/PostManager/post-manager.service';
 import { Router } from '@angular/router';
 import { AppStateManagerService } from '../../core/service/appStateManager/app-state-manager.service';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-post-card',
-  imports: [],
+  imports: [CardModule, ButtonModule],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.scss'
 })

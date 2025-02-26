@@ -5,10 +5,10 @@ import { PostManagerService } from './core/service/PostManager/post-manager.serv
 import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { AppStateManagerService } from './core/service/appStateManager/app-state-manager.service';
-
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ButtonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
