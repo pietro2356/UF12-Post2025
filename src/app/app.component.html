@@ -1,2 +1,13 @@
 <h1>LEZIONE AFP</h1>
+<h2>Stato: {{appState.state()}}</h2>
+@let st = appState.message();
+
+@if (st) {
+    <p>Message: {{appState.message()}}</p>
+}
+<button (click)="appState.setStateToReady()">READY</button>
+<button (click)="appState.setStateToLoading()">LOADING</button>
+<button (click)="appState.setStateToLoading('Caricamento')">LOADING + MSG</button>
+<button (click)="appState.setStateToError('Errore manuale...')">ERROR</button>
+
 <router-outlet/>

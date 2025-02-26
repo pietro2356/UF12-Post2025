@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { AppStateManagerService } from './../../core/service/appStateManager/app-state-manager.service';
+import { Component, effect, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -8,5 +9,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './page-not-found.component.scss'
 })
 export class PageNotFoundComponent {
+  readonly #appState = inject(AppStateManagerService);
+  readonly #router = inject(Router);
 
+  constructor(){
+    effect(() => {
+      if(this.#appState.state() !== "ERROR")
+        this.#router.navigate(["/home"]);
+    })
+  }
 }

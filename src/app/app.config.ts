@@ -1,8 +1,9 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { PostManagerService } from './core/service/PostManager/post-manager.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +12,9 @@ export const appConfig: ApplicationConfig = {
       routes,
       withComponentInputBinding()
     ),
-    provideHttpClient()
+    provideHttpClient(),
+    provideAppInitializer(() => {
+      inject(PostManagerService).recuperaPostViaHttp()
+    })
   ]
 };

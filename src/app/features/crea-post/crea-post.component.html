@@ -27,11 +27,17 @@
 @let titoloVal = titolo() || "";
 @let bodyVal = body() || "";
 @let userIdVal = userId() || -1;
+@let idd = id() || -999;
 <button 
     (click)="postMangerSrv.publicaPost(titoloVal, bodyVal, userIdVal)"
     [disabled]="!verificaInput(titoloVal, bodyVal, userIdVal)"
 >
     PUBBLICA POST
+</button>
+<button 
+    (click)="modificaPost()"
+>
+    MODIFICA POST
 </button>
 <!-- @let titoloVal = titolo.value || "";
 @let bodyVal = body.value || "";
@@ -49,10 +55,12 @@
 <p>Titolo: {{titolo()}}</p>
 <p>Body: {{body() || "Non fornito"}}</p>
 <p>userId: {{userId() || "Non fornito"}}</p>
+<p>ID: {{id() || "Non fornito"}}</p>
 <hr>
 <p>Titolo: {{titoloVal}}</p>
 <p>Body: {{bodyVal || "Non fornito"}}</p>
 <p>userId: {{userIdVal || "Non fornito"}}</p>
+<p>ID: {{idd || "Non fornito"}}</p>
 
 <!-- <p>Titolo: {{titolo.value || "Non fornito"}}</p>
 <p>Body: {{body.value || "Non fornito"}}</p>

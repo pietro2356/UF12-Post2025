@@ -1,6 +1,7 @@
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject, model } from '@angular/core';
 import { PostManagerService } from '../../core/service/PostManager/post-manager.service';
+import { Post } from '../../core/model/post.model';
 
 @Component({
   selector: 'app-crea-post',
@@ -20,6 +21,8 @@ export class CreaPostComponent {
   body = model.required<string>();
   userId = model.required<number>();
 
+  id = model<string>("-999");
+
   convertToNumber(val: string|null){
     return Number(val);
   }
@@ -34,5 +37,16 @@ export class CreaPostComponent {
 
   impostaPostDiDefault(){
     this.titolo.set('CIAO SONO IL TITOLO DI DEFAULT');
+  }
+
+  modificaPost(){
+    const tmpPost: Post = {
+      title: this.titolo(),
+      body: this.body(),
+      userId: this.userId(),
+      id: this.convertToNumber(this.id())
+    };
+
+    this.postMangerSrv.modificaPost(tmpPost);
   }
 }

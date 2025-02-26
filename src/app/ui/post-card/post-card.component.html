@@ -2,6 +2,7 @@
     <h1>{{post().title}}</h1>
     <p>{{post().body}}</p>
     <div class="post()__info">
+        <h4>Stato: {{appState.state()}}</h4>
         <p>ID: {{post().id}}</p>
         <p>Matricola: {{post().userId}}</p>
         <button (click)="visualizzaDettagli(post().id)">
@@ -9,9 +10,19 @@
         </button>
         <!-- /99999?titolo=gsdks&body=hjhfgs -->
         <button 
-        (click)="modifca()"
+            (click)="modifca()"
         >
             MODIFICA
+        </button>
+        <button 
+            (click)="postManagerSrv.eliminaPost(post().id)"
+        >
+            ELIMINA
+        </button>
+        <button 
+            (click)="appState.setStateToError('L\'app ha fatto boom🔥')"
+        >
+            BOOM🔥
         </button>
     </div>
 </div>
