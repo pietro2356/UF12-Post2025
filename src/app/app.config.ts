@@ -1,5 +1,5 @@
 import {
-  ApplicationConfig,
+  ApplicationConfig, ErrorHandler,
   inject,
   provideAppInitializer,
   provideZoneChangeDetection,
@@ -13,8 +13,9 @@ import { PostManagerService } from './core/service/PostManager/post-manager.serv
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { providePrimeNG } from 'primeng/config';
-import Material from '@primeng/themes/material';
-
+import {GlobalErrorHandler} from './core/ErrorManager/GlobalErrorHandler';
+import {MessageService} from 'primeng/api';
+import {LaraOP} from './core/themes/LaraOP';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -26,8 +27,18 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Material,
+        preset: LaraOP,
+        options:{
+          darkModeSelector: false
+        }
       },
     }),
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
+    {
+      provide: MessageService
+    }
   ],
 };
