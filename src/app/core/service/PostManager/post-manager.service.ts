@@ -9,13 +9,13 @@ import { AppStateManagerService } from '../appStateManager/app-state-manager.ser
   providedIn: 'root'
 })
 export class PostManagerService {
-  #URL = "https://jsonplaceholder.typicode.com/posts";
+  readonly #URL = "https://jsonplaceholder.typicode.com/posts";
 
-  #http = inject(HttpClient);
-  #router = inject(Router);
+  readonly #http = inject(HttpClient);
+  readonly #router = inject(Router);
   readonly #appState = inject(AppStateManagerService);
 
-  #postList = signal<Post[]>([]);
+  readonly #postList = signal<Post[]>([]);
   readonly postListComp = computed(() => this.#postList());
 
 

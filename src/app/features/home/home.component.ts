@@ -10,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  postManagerSrv = inject(PostManagerService);
+  readonly postManagerSrv = inject(PostManagerService);
 }

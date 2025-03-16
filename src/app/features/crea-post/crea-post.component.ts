@@ -12,7 +12,7 @@ import {InputTextModule} from 'primeng/inputtext';
 })
 export class CreaPostComponent {
 
-  postMangerSrv = inject(PostManagerService);
+  readonly postMangerSrv = inject(PostManagerService);
 
   // titolo = new FormControl<string>('', [Validators.required]);
   // body = new FormControl('');

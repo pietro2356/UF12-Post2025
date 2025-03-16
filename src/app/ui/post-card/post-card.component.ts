@@ -13,11 +13,11 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './post-card.component.scss'
 })
 export class PostCardComponent {
-  post = input.required<Post>();
+  readonly post = input.required<Post>();
 
-  postManagerSrv = inject(PostManagerService);
-  appState = inject(AppStateManagerService);
-  router = inject(Router);
+  readonly postManagerSrv = inject(PostManagerService);
+  readonly appState = inject(AppStateManagerService);
+  readonly router = inject(Router);
 
   visualizzaDettagli(postId: number){
     // /dettagli/:id
@@ -26,9 +26,9 @@ export class PostCardComponent {
   modifca(){
     // this.router.navigate(["/modifica-post/"+this.post().userId+"?titolo="+this.post().title+"&body="+this.post().body]);
     this.router.navigate(["/modifica-post",
-      this.post().id, 
-      this.post().userId, 
-      this.post().title, 
+      this.post().id,
+      this.post().userId,
+      this.post().title,
       this.post().body
     ]);
   }
