@@ -1,22 +1,20 @@
-import { computed, effect, inject, Injectable, Signal, signal } from '@angular/core';
+import { computed, inject, Injectable, Signal, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppStateManagerService {
   readonly #internalAppState = signal<AppState>(InitialAppState);
   readonly #router = inject(Router);
-  
+  readonly #msgSrv = inject(MessageService);
+
   public state: Signal<State> = computed<State>(() => this.#internalAppState().state);
   public message: Signal<Message> = computed<Message>(() => this.#internalAppState().message);
 
 
-  constructor(){
-    effect(() => {
-      console.table(this.#internalAppState());
-    });
-  }
+  constructor(){}
 
 
   public setStateToReady(){
@@ -25,6 +23,10 @@ export class AppStateManagerService {
         state: "READY",
       }
     });
+    this.#msgSrv.add({
+      severity: 'success',
+      detail: 'Operazione completata con successo'
+    })
   }
 
   public setStateToLoading(_message?: Message){
@@ -35,7 +37,7 @@ export class AppStateManagerService {
       }
     });
   }
-  
+
   public setStateToError(_message: Message){
     this.#internalAppState.update(() => {
       return {
@@ -43,13 +45,19 @@ export class AppStateManagerService {
         message: _message
       }
     });
+    this.#msgSrv.add({
+      severity: 'error',
+      summary: 'C\'è stato un errore',
+      detail: _message,
+      sticky: true
+    })
     this.#router.navigate(['/not-found'])
   }
 }
 
 /**
  * READY, LOADING, ERROR
- * 
+ *
  * - Impostare lo stato
  * - Visualizzare lo stato
  */

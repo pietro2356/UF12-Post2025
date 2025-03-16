@@ -1,4 +1,3 @@
-import { PostListMock } from './../../model/post.model';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Post } from '../../model/post.model';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +30,7 @@ export class PostManagerService {
     console.log("Postlist:", this.#postList());
     console.log("postId:", postId);
     console.log("find:", this.#postList().find(p => p.id === postId));
-    
+
     return this.#postList().find(p => p.id === postId) ?? {
       id: -999,
       title: "Post non disponibili",
@@ -50,9 +49,9 @@ export class PostManagerService {
     this.#http.get<Post[]>(this.#URL)
     .pipe(
       retry(3),
+      /*
+      --> RIMOSSI IN QUANTO ORA GESTIAMO GLI ERRORI TRAMITE IL SERVIZIO CUSTOM
       catchError((err) => {
-        console.error(err);
-        this.#appState.setStateToError(err.message);
         return of<Post[]>([
           {
             id: -1,
@@ -61,17 +60,17 @@ export class PostManagerService {
             body: "E3423 - " + err.message,
           }
         ]);
-      }),
+      }),*/
     )
     .subscribe((postList: Post[]) => {
       console.log("Lista dei Post: ", postList);
-      
+
       // this.#postList.set(postList);
       this.#postList.update(() => [
         ...this.#postList(),
         ...postList
       ]);
-      
+
       if(postList[0].id === -1) this.#appState.setStateToError("afsds");
       else this.#appState.setStateToReady();
     });
@@ -158,7 +157,7 @@ export class PostManagerService {
         return of(null);
       }),
     )
-    .subscribe((data) => {
+    .subscribe(() => {
       this.#postList.update(() => {
         return this.#postList().filter((p) => p.id !== id);
       })
