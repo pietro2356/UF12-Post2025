@@ -1,8 +1,33 @@
-<div class="post">
-    <h1>{{post().titolo}}</h1>
-    <p>{{post().body}}</p>
-    <div class="post()__info">
-        <p>ID: {{post().id}}</p>
-        <p>Matricola: {{post().userId}}</p>
-    </div>
+<div class="mb-4 p-8 flex items-center justify-center">
+    <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+        <ng-template #title>{{post().title}}</ng-template>
+        <ng-template #subtitle>{{post().userId}}</ng-template>
+        <p>
+            {{post().body}}
+        </p>
+        <ng-template #footer>
+            <div class="flex gap-4 mt-1">
+                <p-button 
+                    (click)="visualizzaDettagli(post().id)"
+                    label="DETTAGLI"
+                    severity="info"
+                />
+                <p-button 
+                    (click)="modifca()"
+                    label="MODIFICA"
+                    severity="info"
+                />
+                <p-button 
+                    (click)="postManagerSrv.eliminaPost(post().id)"
+                    label="ELIMINA"
+                    severity="danger"
+                />
+                <p-button 
+                    (click)="appState.setStateToError('L\'app ha fatto boom🔥')"
+                    label="BOOM🔥"
+                    severity="danger"
+                />
+            </div>
+        </ng-template>
+    </p-card>
 </div>

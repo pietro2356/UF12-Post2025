@@ -1,31 +1,23 @@
 import { Component, inject } from '@angular/core';
-import { PostCardComponent } from './ui/post-card/post-card.component';
-import { PostManagerService } from './core/service/PostManager/post-manager.service';
-
+import { RouterOutlet } from '@angular/router';
+import { AppStateManagerService } from './core/service/appStateManager/app-state-manager.service';
+import { ButtonModule } from 'primeng/button';
+import {LogicalError} from './core/ErrorManager/LogicalError';
+import {Toast} from 'primeng/toast';
 @Component({
   selector: 'app-root',
-  imports: [PostCardComponent],
+  imports: [RouterOutlet, ButtonModule, Toast],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  /**
-   * - Con quali dati lavoriamo?
-   * - Come li stutturiamo?
-   * - Architettura del progetto
-   * - Creiamo il componente post [card-lista]
-   *
-   * 1)
-   *  Post
-   *    - titolo
-   *    - descrizione
-   *    - id
-   *    - userId
-   *
-   * 2) interfaccia
-   * 3)
-   *
-   */
+  readonly appState = inject(AppStateManagerService);
 
-  postManagerSrv = inject(PostManagerService);
+  lanciaErrore(){
+    throw new Error("Errore lanciato da giggino AppComponent");
+  }
+
+  lanciaLogicalError(){
+    throw new LogicalError("Logica fallace", "AppComponent");
+  }
 }

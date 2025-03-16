@@ -1,16 +1,19 @@
-<button (click)="postManagerSrv.generaPost()">
-    Aggiungi post: {{postManagerSrv.postListComp().length}}
-</button>
-<button (click)="postManagerSrv.recuperaPostViaHttp()">
-    Recupera post
-</button>
+<p-toast />
+<h1>LEZIONE AFP</h1>
+<h2>Stato: {{appState.state()}}</h2>
+@let st = appState.message();
 
-<div class="post__container">
-    @for (post of postManagerSrv.postListComp(); track post.id) {
-        <app-post-card [post]="post"></app-post-card>
-    }
-    @empty {
-        <h1>Nessun post disponibile</h1>
-    }
+@if (st) {
+<p>Message: {{appState.message()}}</p>
+}
+<div class="flex justify-center">
+    <p-button (click)="appState.setStateToReady()" label="READY" severity="success" />
+    <p-button (click)="appState.setStateToLoading()" label="LOADING" severity="help" [loading]="appState.state() === 'LOADING'" />
+    <p-button (click)="appState.setStateToLoading('Caricamento')" label="LOADING + MSG" severity="help" [loading]="appState.state() === 'LOADING'" />
+    <p-button (click)="appState.setStateToError('Errore manuale...')" label="ERROR" severity="danger" [rounded]="true"/>
+    <p-button (click)="lanciaErrore()" label="LANCIA ERROR" severity="danger" [rounded]="false"/>
+    <p-button (click)="lanciaLogicalError()" label="LANCIA ERRORE LOGICO" severity="danger" [rounded]="false"/>
 </div>
 
+
+<router-outlet />

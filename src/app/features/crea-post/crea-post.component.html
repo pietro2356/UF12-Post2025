@@ -1,0 +1,75 @@
+<form class="myForm">
+    <label for="titolo">Titolo</label>
+    <input
+        pInputText
+        type="text"
+        name="titolo"
+        id="titolo"
+        [(ngModel)]="titolo"
+
+        [class.ng-invalid]="validaInput()"
+        [class.ng-dirty]="validaInput()"
+    >
+
+    <label for="body">Body</label>
+    <input
+        type="text"
+        name="body"
+        id="body"
+        [(ngModel)]="body"
+    >
+
+    <label for="userId">UserId</label>
+    <input
+        type="number"
+        name="userId"
+        id="userId"
+        [(ngModel)]="userId"
+    >
+</form>
+<button (click)="impostaPostDiDefault()">DEFALIT</button>
+@let titoloVal = titolo() || "";
+@let bodyVal = body() || "";
+@let userIdVal = userId() || -1;
+@let idd = id() || -999;
+<button
+    (click)="postMangerSrv.publicaPost(titoloVal, bodyVal, userIdVal)"
+    [disabled]="!verificaInput(titoloVal, bodyVal, userIdVal)"
+>
+    PUBBLICA POST
+</button>
+<button
+    (click)="modificaPost()"
+>
+    MODIFICA POST
+</button>
+<!-- @let titoloVal = titolo.value || "";
+@let bodyVal = body.value || "";
+@let userIdVal = userId.value || -1;
+
+<button
+    (click)="postMangerSrv.publicaPost(titoloVal, bodyVal, userIdVal)"
+    [disabled]="!verificaInput(titoloVal, bodyVal, userIdVal)"
+>
+    PUBBLICA POST
+</button> -->
+
+<hr>
+<h2>Resoconto</h2>
+<p>Titolo: {{titolo()}}</p>
+<p>Body: {{body() || "Non fornito"}}</p>
+<p>userId: {{userId() || "Non fornito"}}</p>
+<p>ID: {{id() || "Non fornito"}}</p>
+<hr>
+<p>Titolo: {{titoloVal}}</p>
+<p>Body: {{bodyVal || "Non fornito"}}</p>
+<p>userId: {{userIdVal || "Non fornito"}}</p>
+<p>ID: {{idd || "Non fornito"}}</p>
+
+<!-- <p>Titolo: {{titolo.value || "Non fornito"}}</p>
+<p>Body: {{body.value || "Non fornito"}}</p>
+<p>userId: {{userId.value || "Non fornito"}}</p>
+<hr>
+<p>Titolo: {{titoloVal || "Non fornito"}}</p>
+<p>Body: {{bodyVal || "Non fornito"}}</p>
+<p>userId: {{userIdVal || "Non fornito"}}</p> -->

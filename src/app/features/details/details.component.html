@@ -1,0 +1,39 @@
+<h2>
+    <a 
+        [routerLink]="['/home']"
+        routerLinkActive="router-link-active" 
+    >
+        HOME
+    </a>
+</h2>
+
+<!--
+    Con @let possiamo creare delle variabili interne al template senza scomodare il TS.
+    Estremamaente utile per una questione di efficienza e leggibilità del codice.
+
+    In questo caso la usiamo per conservare il post recuperato dal servizio postManagerSrv.
+-->
+@let postDetail = postManagerSrv.recuperaPostViaId(postIdNumber());
+
+<!-- 
+    Verifichiamo se l'id del post è -999, in tal caso vuol dire che si tratta del post di errore.
+    Mostriamo quindi il messaggio 'NESSUN POST VALIDO' e 
+    diamo la possibilità di recuperare i post tramite la chiamata HTTP.
+-->
+@if (postDetail.id !== -999) {
+    <h1>POSTID: {{postDetail.id}}</h1>
+    <h1>Titolo: {{postDetail.title}}</h1>
+    <h1>Id: {{postDetail.id}}</h1>
+    <h1>body: {{postDetail.body}}</h1>
+}
+@else {
+    <h1>NESSUN POST VALIDO</h1>
+    <button (click)="postManagerSrv.recuperaPostViaHttp()">
+        Recupera post
+    </button>
+}
+
+<hr>
+<h3>PostId: {{postId() ?? "Non fornito"}}</h3>
+<h3>token: {{token() ?? "Non fornito"}}</h3>
+<h3>passwd: {{passwd() ?? "Non fornito"}}</h3>
