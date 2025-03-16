@@ -1,24 +1,28 @@
-<form>
+<form class="myForm">
     <label for="titolo">Titolo</label>
-    <input 
-        type="text" 
-        name="titolo" 
-        id="titolo" 
+    <input
+        pInputText
+        type="text"
+        name="titolo"
+        id="titolo"
         [(ngModel)]="titolo"
+
+        [class.ng-invalid]="validaInput()"
+        [class.ng-dirty]="validaInput()"
     >
 
     <label for="body">Body</label>
-    <input 
-        type="text" 
-        name="body" 
+    <input
+        type="text"
+        name="body"
         id="body"
         [(ngModel)]="body"
     >
 
     <label for="userId">UserId</label>
-    <input 
-        type="number" 
-        name="userId" 
+    <input
+        type="number"
+        name="userId"
         id="userId"
         [(ngModel)]="userId"
     >
@@ -28,13 +32,13 @@
 @let bodyVal = body() || "";
 @let userIdVal = userId() || -1;
 @let idd = id() || -999;
-<button 
+<button
     (click)="postMangerSrv.publicaPost(titoloVal, bodyVal, userIdVal)"
     [disabled]="!verificaInput(titoloVal, bodyVal, userIdVal)"
 >
     PUBBLICA POST
 </button>
-<button 
+<button
     (click)="modificaPost()"
 >
     MODIFICA POST
@@ -43,7 +47,7 @@
 @let bodyVal = body.value || "";
 @let userIdVal = userId.value || -1;
 
-<button 
+<button
     (click)="postMangerSrv.publicaPost(titoloVal, bodyVal, userIdVal)"
     [disabled]="!verificaInput(titoloVal, bodyVal, userIdVal)"
 >

@@ -1,11 +1,12 @@
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component, inject, model } from '@angular/core';
 import { PostManagerService } from '../../core/service/PostManager/post-manager.service';
 import { Post } from '../../core/model/post.model';
+import {InputTextModule} from 'primeng/inputtext';
 
 @Component({
   selector: 'app-crea-post',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, InputTextModule],
   templateUrl: './crea-post.component.html',
   styleUrl: './crea-post.component.scss'
 })
@@ -30,9 +31,7 @@ export class CreaPostComponent {
   verificaInput(titolo: string, body: string, userId: number){
     if(titolo.length <= 3) return false;
     if(body.length <= 5) return false;
-    if(userId < 0) return false;
-    
-    return true;
+    return userId >= 0;
   }
 
   impostaPostDiDefault(){
@@ -48,5 +47,11 @@ export class CreaPostComponent {
     };
 
     this.postMangerSrv.modificaPost(tmpPost);
+  }
+
+  validaInput(){
+    console.log(this.titolo());
+    if (this.titolo() === undefined) return true;
+    return this.titolo().length === 16;
   }
 }
