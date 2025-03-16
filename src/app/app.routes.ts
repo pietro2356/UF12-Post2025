@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
-import { DetailsComponent } from './features/details/details.component';
 import { HomeComponent } from './features/home/home.component';
-import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
-import { CreaPostComponent } from './features/crea-post/crea-post.component';
 
 export const routes: Routes = [
     {
@@ -11,12 +8,17 @@ export const routes: Routes = [
     },
     {
         path: 'dettagli', // /dettagli
-        component: DetailsComponent
+        //component: DetailsComponent
+        loadComponent(){
+          return import('./features/details/details.component').then(m => m.DetailsComponent);
+        }
     },
     // localhost:4200/dettagli/3/tk/pwd -> postId
     {
         path: 'dettagli/:postId', // /dettagli/4
-        component: DetailsComponent
+        loadComponent(){
+          return import('./features/details/details.component').then(m => m.DetailsComponent);
+        }
     },
     // {
     //     path: 'dettagli/:postId/:token/:passwd', // /dettagli/4
@@ -24,15 +26,23 @@ export const routes: Routes = [
     // },
     {
         path: 'crea-post',
-        component: CreaPostComponent
+        //component: CreaPostComponent
+        loadComponent(){
+          return import('./features/crea-post/crea-post.component').then(m => m.CreaPostComponent);
+        }
     },
     {
         path: 'modifica-post/:id/:userId/:titolo/:body',
-        component: CreaPostComponent
+        loadComponent(){
+          return import('./features/crea-post/crea-post.component').then(m => m.CreaPostComponent);
+        }
     },
     {
         path: 'not-found',
-        component: PageNotFoundComponent
+        //component: PageNotFoundComponent
+        loadComponent(){
+          return import('./features/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent);
+        }
     },
     {
         path: '',
@@ -41,6 +51,8 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        component: PageNotFoundComponent
+        loadComponent(){
+          return import('./features/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent);
+        }
     },
 ];
